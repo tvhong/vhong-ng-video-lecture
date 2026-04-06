@@ -28,6 +28,7 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 | Date | Hours | What |
 | ---- | ----- | ---- |
+| 2026-04-06 | 3:30 PM start | Block 1: Data & Bigram Baseline |
 
 #### Block 1: Data & Bigram Baseline (0:00–38:01, ~1.5h implement)
 

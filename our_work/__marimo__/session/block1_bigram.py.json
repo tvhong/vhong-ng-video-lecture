@@ -40,7 +40,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "ce376b4f1b5d755ceef4e2c774f63feb",
+      "code_hash": "1e59c4ff2cee59b464af387a3a5450f1",
       "outputs": [
         {
           "type": "data",
@@ -80,7 +80,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "bc3ba1330b82309786022321ecc22b4b",
+      "code_hash": "8b265c72fe3a46be4db3ff176b2aaa42",
       "outputs": [
         {
           "type": "data",
@@ -133,7 +133,7 @@
     },
     {
       "id": "SFPL",
-      "code_hash": "e9052079f935b1bfd2bd78d65c2db46d",
+      "code_hash": "10597bf7ac3885da95c06bc30aa6adc3",
       "outputs": [
         {
           "type": "data",
@@ -146,22 +146,76 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Input shape: torch.Size([32, 8]), Target shape: torch.Size([32, 8])\n\nFirst sequence input:  tensor([52, 63,  1, 58, 47, 51, 43, 57])\nFirst sequence target: tensor([63,  1, 58, 47, 51, 43, 57,  1])\n",
+          "text": "Input shape: torch.Size([32, 8]), Target shape: torch.Size([32, 8])\n\nFirst sequence input:  tensor([ 6,  0, 21, 44,  1, 61, 43,  1])\nFirst sequence target: tensor([ 0, 21, 44,  1, 61, 43,  1, 61])\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
       "id": "BYtC",
-      "code_hash": null,
-      "outputs": [],
+      "code_hash": "f29cf167176ac651b520a3ecd213289a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
       "id": "MXCu",
-      "code_hash": null,
-      "outputs": [],
+      "code_hash": "880ce8c4cd123ebdd431c989ae57c94b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "2de336ba0c7220f3d72adc471fe94353",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "step 0: train loss 4.7307, val loss 4.7239\nstep 300: train loss 2.8109, val loss 2.8247\nstep 600: train loss 2.5442, val loss 2.5686\nstep 900: train loss 2.4930, val loss 2.5085\nstep 1200: train loss 2.4861, val loss 2.5039\nstep 1500: train loss 2.4665, val loss 2.4920\nstep 1800: train loss 2.4688, val loss 2.4933\nstep 2100: train loss 2.4700, val loss 2.4851\nstep 2400: train loss 2.4639, val loss 2.4880\nstep 2700: train loss 2.4733, val loss 2.4911\nFinal: train loss 2.4614, val loss 2.4900\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "emfo",
+      "code_hash": "403719e976dd8f0d866b321ba30ba6ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "\nTHAr toud en: ty s come\n\nPat s, ore wilkigulllo isowanornon ws alinthifofr\nCuker:\nThinertor wien IUCUng l t.\nAnd! he s thaswsantld was w,\nAue y s Ind benteecofo thime me,\n\n\nAPI Win he qur s gtht t camis\nARDWol ce.\nPUCite\nHarenthrvosen ndizGouncesere ballerrang; Va!\nCOROne t mare.\nTuc;\nHoud wnad; foured asiny we lyoundre k beZARo g ls we MII:\nPowor mese's we ant westh afre CI ond.\nDqup fof ut wet d thy t a h'gr s,\nTCHe\nSo me p-iswibes sofuescatt.\n\n\nToubafr\nAnous gar, byor.\nO te,\nSis ldou bicorthi\n",
+          "mimetype": "text/plain"
+        }
+      ]
     }
   ]
 }

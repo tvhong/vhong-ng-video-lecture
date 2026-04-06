@@ -40,7 +40,7 @@ def _(text):
     vocab_size = len(chars)
     print(f"Vocabulary: {''.join(chars)}")
     print(f"Vocab size: {vocab_size}")
-    return (chars,)
+    return chars, vocab_size
 
 
 @app.cell
@@ -59,7 +59,7 @@ def _(chars):
     decoded = decode(encoded)
     print(f"encode('{test_str}') = {encoded}")
     print(f"decode({encoded}) = '{decoded}'")
-    return (encode,)
+    return decode, encode
 
 
 @app.cell
@@ -80,19 +80,20 @@ def _():
 
 
 @app.cell
-def _(batch_size, block_size, torch, train_data, val_data):
+def _(batch_size, block_size, device, torch, train_data, val_data):
     def get_batch(split):
         data = train_data if split == "train" else val_data
         ix = torch.randint(len(data) - block_size, (batch_size,))
         x = torch.stack([data[i : i + block_size] for i in ix])
         y = torch.stack([data[i + 1 : i + block_size + 1] for i in ix])
+        x, y = x.to(device), y.to(device)
         return x, y
 
-    xb, yb = get_batch("train")
-    print(f"Input shape: {xb.shape}, Target shape: {yb.shape}")
-    print(f"\nFirst sequence input:  {xb[0]}")
-    print(f"First sequence target: {yb[0]}")
-    return
+    _xb, _yb = get_batch("train")
+    print(f"Input shape: {_xb.shape}, Target shape: {_yb.shape}")
+    print(f"\nFirst sequence input:  {_xb[0]}")
+    print(f"First sequence target: {_yb[0]}")
+    return (get_batch,)
 
 
 @app.cell
@@ -124,11 +125,63 @@ def _(F, nn, torch):
                 idx = torch.cat((idx, idx_next), dim=1)  # (B, T+1)
             return idx
 
+    return (BigramLanguageModel,)
+
+
+@app.cell
+def _(BigramLanguageModel, torch, vocab_size):
+    torch.manual_seed(1337)
+    model = BigramLanguageModel(vocab_size)
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    m = model.to(device)
+    return device, m, model
+
+
+@app.cell
+def _(get_batch, model, torch):
+    max_iters = 3000
+    eval_interval = 300
+    learning_rate = 1e-2
+
+    optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+
+    eval_iters = 200
+
+    @torch.no_grad()
+    def estimate_loss():
+        out = {}
+        model.eval()
+        for split in ['train', 'val']:
+            losses = torch.zeros(eval_iters)
+            for k in range(eval_iters):
+                X, Y = get_batch(split)
+                _, loss = model(X, Y)
+                losses[k] = loss.item()
+            out[split] = losses.mean()
+        model.train()
+        return out
+
+    for iter in range(max_iters):
+        if iter % eval_interval == 0:
+            losses = estimate_loss()
+            print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+
+        xb, yb = get_batch('train')
+        logits, loss = model(xb, yb)
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad(set_to_none=True)
+
+    losses = estimate_loss()
+    print(f"Final: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
     return
 
 
 @app.cell
-def _():
+def _(decode, device, m, torch):
+    context = torch.zeros((1, 1), dtype=torch.long, device=device)
+    generated = m.generate(context, max_new_tokens=500)
+    print(decode(generated[0].tolist()))
     return
 
 

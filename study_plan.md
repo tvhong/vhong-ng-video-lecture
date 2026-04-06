@@ -28,16 +28,16 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 | Date | Hours | What |
 | ---- | ----- | ---- |
-| 2026-04-06 | 3:30 PM start | Block 1: Data & Bigram Baseline |
+| 2026-04-06 | 1.5h (3:30–5:00 PM) | Block 1: Data & Bigram Baseline (items 1-4 complete) |
 
 #### Block 1: Data & Bigram Baseline (0:00–38:01, ~1.5h implement)
 
 **Watch** intro through bigram model training. Then implement:
 
-1. [ ] Read Tiny Shakespeare, build character-level tokenizer (encode/decode), train/val split
-2. [ ] Implement data loader: sample random chunks of block_size, batch them into (B, T) tensors
-3. [ ] Implement bigram language model (nn.Module): token embedding → logits, cross-entropy loss, generate function
-4. [ ] Train bigram model, verify loss decreases from ~4.87 toward ~2.5
+1. [x] Read Tiny Shakespeare, build character-level tokenizer (encode/decode), train/val split
+2. [x] Implement data loader: sample random chunks of block_size, batch them into (B, T) tensors
+3. [x] Implement bigram language model (nn.Module): token embedding → logits, cross-entropy loss, generate function
+4. [x] Train bigram model, verify loss decreases from ~4.87 toward ~2.5
 
 #### Block 2: Self-Attention (38:01–1:10:01, ~3h implement)
 

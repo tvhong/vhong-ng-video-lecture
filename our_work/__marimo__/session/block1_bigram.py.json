@@ -100,7 +100,7 @@
     },
     {
       "id": "PKri",
-      "code_hash": "7235f380245f15c6dfae096192e8fad7",
+      "code_hash": "0aa234d1b8a21524a4f31867e15a0e2a",
       "outputs": [
         {
           "type": "data",
@@ -120,6 +120,39 @@
     },
     {
       "id": "rrkH",
+      "code_hash": "3080cf6d29e97f39d2d656fa59b81ed4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "e9052079f935b1bfd2bd78d65c2db46d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Input shape: torch.Size([32, 8]), Target shape: torch.Size([32, 8])\n\nFirst sequence input:  tensor([52, 63,  1, 58, 47, 51, 43, 57])\nFirst sequence target: tensor([63,  1, 58, 47, 51, 43, 57,  1])\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "MXCu",
       "code_hash": null,
       "outputs": [],
       "console": []

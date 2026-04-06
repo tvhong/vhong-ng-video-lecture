@@ -69,6 +69,29 @@ def _(encode, text, torch):
     train_data = data[:n]
     val_data = data[n:]
     print(f"Train size: {len(train_data)}, Val size: {len(val_data)}")
+    return train_data, val_data
+
+
+@app.cell
+def _():
+    batch_size = 32
+    block_size = 8
+    return batch_size, block_size
+
+
+@app.cell
+def _(batch_size, block_size, torch, train_data, val_data):
+    def get_batch(split):
+        data = train_data if split == 'train' else val_data
+        ix = torch.randint(len(data) - block_size, (batch_size,))
+        x = torch.stack([data[i:i+block_size] for i in ix])
+        y = torch.stack([data[i+1:i+block_size+1] for i in ix])
+        return x, y
+
+    xb, yb = get_batch('train')
+    print(f"Input shape: {xb.shape}, Target shape: {yb.shape}")
+    print(f"\nFirst sequence input:  {xb[0]}")
+    print(f"First sequence target: {yb[0]}")
     return
 
 

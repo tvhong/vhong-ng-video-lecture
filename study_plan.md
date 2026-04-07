@@ -43,9 +43,9 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 **Watch** the matrix multiply trick (versions 1-3), then single-head self-attention. This is the core of the lecture. Then implement:
 
-5. [ ] Implement version 1: weighted averaging of past context with for loops (bag of words)
-6. [ ] Implement version 2: lower triangular matrix multiply trick (tril + ones, batched matmul)
-7. [ ] Implement version 3: masked_fill with -inf + softmax (this becomes the attention pattern)
+5. [x] Implement version 1: weighted averaging of past context with for loops (bag of words)
+6. [x] Implement version 2: lower triangular matrix multiply trick (tril + ones, batched matmul)
+7. [x] Implement version 3: masked_fill with -inf + softmax (this becomes the attention pattern)
 8. [ ] Implement single head of self-attention: key, query, value projections; scaled dot-product; causal mask
 9. [ ] Add positional embeddings; plug self-attention head into the model; train and verify improvement
 

@@ -185,5 +185,63 @@ def _(decode, device, m, torch):
     return
 
 
+@app.cell
+def _(mo):
+    mo.md("""
+    # Self-Attention: Building Intuition
+
+    Three versions of weighted averaging over past context, leading up to self-attention.
+    """)
+    return
+
+
+@app.cell
+def _(torch):
+    torch.manual_seed(42)
+    B, T, C = 4, 8, 2
+    x = torch.randn(B, T, C)
+
+    # Version 1: for-loop bag of words
+    xbow = torch.zeros((B, T, C))
+    for b in range(B):
+        for t in range(T):
+            xprev = x[b, :t+1, :]  # (t, C)
+            xbow[b, t] = xprev.mean(dim=0)
+
+    print("x[0]:")
+    print(x[0])
+    print("\nxbow[0] (bag of words via for loop):")
+    print(xbow[0])
+    return T, x
+
+
+@app.cell
+def _(T, torch, x):
+    # Version 2: matrix multiply trick
+    _wei = torch.tril(torch.ones(T, T))
+    _wei = _wei / _wei.sum(dim=1, keepdim=True)
+    _xbow2 = _wei @ x  # (T, T) @ (B, T, C) -> (B, T, C)
+    print("_wei:")
+    print(_wei)
+    print("\n_xbow2[0] (matrix multiply trick):")
+    print(_xbow2[0])
+    return
+
+
+@app.cell
+def _(F, T, torch, x):
+    # Version 3: softmax with masked fill
+    _tril = torch.tril(torch.ones(T, T))
+    _wei = torch.zeros((T, T))
+    _wei = _wei.masked_fill(_tril == 0, float('-inf'))
+    _wei = F.softmax(_wei, dim=1)
+    _xbow3 = _wei @ x  # (B, T, C)
+    print("_wei:")
+    print(_wei)
+    print("\n_xbow3[0] (softmax + masked fill):")
+    print(_xbow3[0])
+    return
+
+
 if __name__ == "__main__":
     app.run()

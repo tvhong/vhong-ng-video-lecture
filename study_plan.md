@@ -33,6 +33,7 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 | 2026-04-08 | 1.5h (9:30–11:00 PM) | Block 2: Watched single-head self-attention & positional embeddings, Q/K/V discussion |
 | 2026-04-09 | 0.75h                | Block 2: Watched video up to 1:16:00                                                  |
 | 2026-04-09 | 0.5h                 | Block 2: Implemented single-head self-attention + positional embeddings (items 8-9)   |
+| 2026-04-09 | 0.5h                 | Block 3: Implemented multi-head attention, FFN, transformer block (items 10-12)       |
 
 #### Block 1: Data & Bigram Baseline (0:00–38:01, ~1.5h implement)
 
@@ -57,9 +58,9 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 **Watch** multi-head attention, feed-forward, and Transformer blocks. Then implement:
 
-10. [ ] Implement multi-head attention: multiple heads in parallel, concatenate outputs
-11. [ ] Implement feed-forward network (Linear → ReLU → Linear) applied per-token after attention
-12. [ ] Create Transformer Block class: self-attention → feed-forward, stack multiple blocks
+10. [x] Implement multi-head attention: multiple heads in parallel, concatenate outputs
+11. [x] Implement feed-forward network (Linear → ReLU → Linear) applied per-token after attention
+12. [x] Create Transformer Block class: self-attention → feed-forward, stack multiple blocks (val loss 2.50, worse without residuals)
 
 #### Block 4: Residual Connections, LayerNorm, Dropout (1:28:00–1:42:00, ~1.5h implement)
 

@@ -26,9 +26,12 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 ### Time Log
 
-| Date | Hours | What |
-| ---- | ----- | ---- |
-| 2026-04-06 | 1.5h (3:30–5:00 PM) | Block 1: Data & Bigram Baseline (items 1-4 complete) |
+| Date       | Hours                | What                                                                                  |
+| ---------- | -------------------- | ------------------------------------------------------------------------------------- |
+| 2026-04-06 | 1.5h (3:30–5:00 PM)  | Block 1: Data & Bigram Baseline (items 1-4 complete)                                  |
+| 2026-04-07 | 1.5h (8:00–9:30 PM)  | Block 2: Self-Attention versions 1-3 (items 5-7 complete)                             |
+| 2026-04-08 | 1.5h (9:30–11:00 PM) | Block 2: Watched single-head self-attention & positional embeddings, Q/K/V discussion |
+| 2026-04-09 | 0.75h                | Block 2: Watched video up to 1:16:00                                                  |
 
 #### Block 1: Data & Bigram Baseline (0:00–38:01, ~1.5h implement)
 

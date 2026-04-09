@@ -243,5 +243,181 @@ def _(F, T, torch, x):
     return
 
 
+@app.cell
+def _(mo):
+    mo.md("""
+    # Version 4: Single Head of Self-Attention
+
+    Now we implement actual self-attention with learned key, query, and value projections.
+    """)
+    return
+
+
+@app.cell
+def _(F, nn, torch):
+    class Head(nn.Module):
+        def __init__(self, n_embd, head_size, block_size):
+            super().__init__()
+            self.key = nn.Linear(n_embd, head_size, bias=False)
+            self.query = nn.Linear(n_embd, head_size, bias=False)
+            self.value = nn.Linear(n_embd, head_size, bias=False)
+            self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))
+
+        def forward(self, x):
+            B, T, C = x.shape
+            k = self.key(x)   # (B, T, head_size)
+            q = self.query(x) # (B, T, head_size)
+
+            # compute attention scores
+            head_size = k.shape[-1]
+            wei = q @ k.transpose(-2, -1) * head_size**-0.5  # (B, T, T)
+            wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
+            wei = F.softmax(wei, dim=-1)  # (B, T, T)
+
+            # weighted aggregation of values
+            v = self.value(x)  # (B, T, head_size)
+            out = wei @ v  # (B, T, head_size)
+            return out
+
+    return (Head,)
+
+
+@app.cell
+def _(Head, torch):
+    torch.manual_seed(1337)
+    _B, _T, _C = 4, 8, 32
+    _head_size = 16
+    _x = torch.randn(_B, _T, _C)
+
+    _head = Head(n_embd=_C, head_size=_head_size, block_size=_T)
+    _out = _head(_x)
+    print(f"Input shape:  {_x.shape}")
+    print(f"Output shape: {_out.shape}")
+    print(f"Expected:     torch.Size([{_B}, {_T}, {_head_size}])")
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    # Self-Attention Language Model
+
+    Upgrading the bigram model: token embeddings + positional embeddings + single-head self-attention.
+    """)
+    return
+
+
+@app.cell
+def _():
+    sa_block_size = 8
+    sa_n_embd = 32
+    sa_head_size = 32
+    return sa_block_size, sa_head_size, sa_n_embd
+
+
+@app.cell
+def _(F, Head, nn, sa_block_size, sa_head_size, sa_n_embd, torch, vocab_size):
+    class SelfAttentionLM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.token_embedding_table = nn.Embedding(vocab_size, sa_n_embd)
+            self.position_embedding_table = nn.Embedding(sa_block_size, sa_n_embd)
+            self.sa_head = Head(sa_n_embd, sa_head_size, sa_block_size)
+            self.lm_head = nn.Linear(sa_head_size, vocab_size)
+
+        def forward(self, idx, targets=None):
+            B, T = idx.shape
+
+            tok_emb = self.token_embedding_table(idx)  # (B, T, n_embd)
+            pos_emb = self.position_embedding_table(torch.arange(T, device=idx.device))  # (T, n_embd)
+            x = tok_emb + pos_emb  # (B, T, n_embd)
+            x = self.sa_head(x)  # (B, T, head_size)
+            logits = self.lm_head(x)  # (B, T, vocab_size)
+
+            if targets is None:
+                loss = None
+            else:
+                B, T, C = logits.shape
+                logits = logits.view(B * T, C)
+                targets = targets.view(B * T)
+                loss = F.cross_entropy(logits, targets)
+
+            return logits, loss
+
+        def generate(self, idx, max_new_tokens):
+            for _ in range(max_new_tokens):
+                idx_cond = idx[:, -sa_block_size:]
+                logits, loss = self(idx_cond)
+                logits = logits[:, -1, :]  # (B, C)
+                probs = F.softmax(logits, dim=-1)  # (B, C)
+                idx_next = torch.multinomial(probs, num_samples=1)  # (B, 1)
+                idx = torch.cat((idx, idx_next), dim=1)  # (B, T+1)
+            return idx
+
+    return (SelfAttentionLM,)
+
+
+@app.cell
+def _(SelfAttentionLM, torch):
+    torch.manual_seed(1337)
+    sa_device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    sa_model = SelfAttentionLM()
+    sa_model = sa_model.to(sa_device)
+    print(f"Parameters: {sum(p.numel() for p in sa_model.parameters()) / 1e3:.1f}K")
+    return sa_device, sa_model
+
+
+@app.cell
+def _(get_batch, sa_model, torch):
+    sa_max_iters = 3000
+    sa_eval_interval = 300
+    sa_learning_rate = 1e-3
+    sa_eval_iters = 200
+
+    _optimizer = torch.optim.AdamW(sa_model.parameters(), lr=sa_learning_rate)
+
+    @torch.no_grad()
+    def _estimate_loss():
+        _out = {}
+        sa_model.eval()
+        for split in ['train', 'val']:
+            losses = torch.zeros(sa_eval_iters)
+            for k in range(sa_eval_iters):
+                X, Y = get_batch(split)
+                _, loss = sa_model(X, Y)
+                losses[k] = loss.item()
+            _out[split] = losses.mean()
+        sa_model.train()
+        return _out
+
+    for _iter in range(sa_max_iters):
+        if _iter % sa_eval_interval == 0:
+            _losses = _estimate_loss()
+            print(f"step {_iter}: train loss {_losses['train']:.4f}, val loss {_losses['val']:.4f}")
+
+        _xb, _yb = get_batch('train')
+        _logits, _loss = sa_model(_xb, _yb)
+        _loss.backward()
+        _optimizer.step()
+        _optimizer.zero_grad(set_to_none=True)
+
+    _losses = _estimate_loss()
+    print(f"Final: train loss {_losses['train']:.4f}, val loss {_losses['val']:.4f}")
+    return
+
+
+@app.cell
+def _(decode, sa_device, sa_model, torch):
+    _context = torch.zeros((1, 1), dtype=torch.long, device=sa_device)
+    _generated = sa_model.generate(_context, max_new_tokens=500)
+    print(decode(_generated[0].tolist()))
+    return
+
+
+@app.cell
+def _():
+    return
+
+
 if __name__ == "__main__":
     app.run()

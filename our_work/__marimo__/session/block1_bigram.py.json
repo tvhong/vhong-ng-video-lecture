@@ -175,54 +175,19 @@
           }
         }
       ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stderr",
-          "text": "/home/ubuntu/workplace/vhong-ng-video-lecture/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)\n  return torch._C._cuda_getDeviceCount() > 0\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "console": []
     },
     {
       "id": "Kclp",
       "code_hash": "2de336ba0c7220f3d72adc471fe94353",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "step 0: train loss 4.7307, val loss 4.7239\nstep 300: train loss 2.8109, val loss 2.8247\nstep 600: train loss 2.5442, val loss 2.5686\nstep 900: train loss 2.4930, val loss 2.5085\nstep 1200: train loss 2.4861, val loss 2.5039\nstep 1500: train loss 2.4665, val loss 2.4920\nstep 1800: train loss 2.4688, val loss 2.4933\nstep 2100: train loss 2.4700, val loss 2.4851\nstep 2400: train loss 2.4639, val loss 2.4880\nstep 2700: train loss 2.4733, val loss 2.4911\nFinal: train loss 2.4614, val loss 2.4900\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "outputs": [],
+      "console": []
     },
     {
       "id": "emfo",
       "code_hash": "403719e976dd8f0d866b321ba30ba6ed",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "\nTHAr toud en: ty s come\n\nPat s, ore wilkigulllo isowanornon ws alinthifofr\nCuker:\nThinertor wien IUCUng l t.\nAnd! he s thaswsantld was w,\nAue y s Ind benteecofo thime me,\n\n\nAPI Win he qur s gtht t camis\nARDWol ce.\nPUCite\nHarenthrvosen ndizGouncesere ballerrang; Va!\nCOROne t mare.\nTuc;\nHoud wnad; foured asiny we lyoundre k beZARo g ls we MII:\nPowor mese's we ant westh afre CI ond.\nDqup fof ut wet d thy t a h'gr s,\nTCHe\nSo me p-iswibes sofuescatt.\n\n\nToubafr\nAnous gar, byor.\nO te,\nSis ldou bicorthi\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "outputs": [],
+      "console": []
     },
     {
       "id": "Hstk",
@@ -240,46 +205,50 @@
     {
       "id": "nWHF",
       "code_hash": "2ee311256184a9d4042848f18966107f",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "x[0]:\ntensor([[ 1.9269,  1.4873],\n        [ 0.9007, -2.1055],\n        [ 0.6784, -1.2345],\n        [-0.0431, -1.6047],\n        [-0.7521,  1.6487],\n        [-0.3925, -1.4036],\n        [-0.7279, -0.5594],\n        [-0.7688,  0.7624]])\n\nxbow[0] (bag of words via for loop):\ntensor([[ 1.9269,  1.4873],\n        [ 1.4138, -0.3091],\n        [ 1.1687, -0.6176],\n        [ 0.8657, -0.8644],\n        [ 0.5422, -0.3617],\n        [ 0.3864, -0.5354],\n        [ 0.2272, -0.5388],\n        [ 0.1027, -0.3762]])\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "outputs": [],
+      "console": []
     },
     {
       "id": "iLit",
-      "code_hash": "d3ddb062069b8da91bdcf589cbfc585c",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "wei:\ntensor([[1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.5000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.3333, 0.3333, 0.3333, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.2500, 0.2500, 0.2500, 0.2500, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.2000, 0.2000, 0.2000, 0.2000, 0.2000, 0.0000, 0.0000, 0.0000],\n        [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.0000, 0.0000],\n        [0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.0000],\n        [0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250]])\n\nxbow2[0] (matrix multiply trick):\ntensor([[ 1.9269,  1.4873],\n        [ 1.4138, -0.3091],\n        [ 1.1687, -0.6176],\n        [ 0.8657, -0.8644],\n        [ 0.5422, -0.3617],\n        [ 0.3864, -0.5354],\n        [ 0.2272, -0.5388],\n        [ 0.1027, -0.3762]])\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "code_hash": "3c8e65016115fdeaf112e5c831ac89b4",
+      "outputs": [],
+      "console": []
     },
     {
       "id": "ZHCJ",
       "code_hash": "fd58696525c78570bc1118cc92a1221f",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "fbeb6dc690a2de5ced064c666b8d0471",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"version-4-single-head-of-self-attention\">Version 4: Single Head of Self-Attention</h1>\n<span class=\"paragraph\">Now we implement actual self-attention with learned key, query, and value projections.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "33f7b22294ad784a7a904d23ebf8b8be",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "61f4bc544fb89b93002029897e855bd7",
       "outputs": [
         {
           "type": "data",
@@ -292,10 +261,121 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "_wei:\ntensor([[1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.5000, 0.5000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.3333, 0.3333, 0.3333, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.2500, 0.2500, 0.2500, 0.2500, 0.0000, 0.0000, 0.0000, 0.0000],\n        [0.2000, 0.2000, 0.2000, 0.2000, 0.2000, 0.0000, 0.0000, 0.0000],\n        [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.0000, 0.0000],\n        [0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.1429, 0.0000],\n        [0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250]])\n\n_xbow3[0] (softmax + masked fill):\ntensor([[ 1.9269,  1.4873],\n        [ 1.4138, -0.3091],\n        [ 1.1687, -0.6176],\n        [ 0.8657, -0.8644],\n        [ 0.5422, -0.3617],\n        [ 0.3864, -0.5354],\n        [ 0.2272, -0.5388],\n        [ 0.1027, -0.3762]])\n",
+          "text": "Input shape:  torch.Size([4, 8, 32])\nOutput shape: torch.Size([4, 8, 16])\nExpected:     torch.Size([4, 8, 16])\n",
           "mimetype": "text/plain"
         }
       ]
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "6a0296b4dc6bd05376dd4eacf08f548f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"self-attention-language-model\">Self-Attention Language Model</h1>\n<span class=\"paragraph\">Upgrading the bigram model: token embeddings + positional embeddings + single-head self-attention.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "0a3065c152749916255dfb044ab9214f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "0c6d7d78f018f36a953fdcce9de40a9c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "c393ddea20706968b54a29ff3c7b53d1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "/home/ubuntu/workplace/vhong-ng-video-lecture/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)\n  return torch._C._cuda_getDeviceCount() > 0\n",
+          "mimetype": "text/plain"
+        },
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Parameters: 7.6K\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "05dc421a9e30016171cb69c9b3c90d5d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "step 0: train loss 4.2002, val loss 4.2057\nstep 300: train loss 2.9870, val loss 2.9872\nstep 600: train loss 2.6505, val loss 2.6669\nstep 900: train loss 2.5393, val loss 2.5505\nstep 1200: train loss 2.5083, val loss 2.5146\nstep 1500: train loss 2.4677, val loss 2.4797\nstep 1800: train loss 2.4535, val loss 2.4687\nstep 2100: train loss 2.4426, val loss 2.4491\nstep 2400: train loss 2.4288, val loss 2.4437\nstep 2700: train loss 2.4314, val loss 2.4344\nFinal: train loss 2.4134, val loss 2.4341\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "4f5cf50ef26f2c5621e9268b11211a1c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "\nTf ratoh.\nSI: hacrecome\nF:\nt hus thind tige ant istengornon thealif wis\nfr\nCuker:\nThinertor wien Iureng l t.\n bet hess thas sant sh ss wh\nAu:\nKI adchtienteecof pous, om thind,I the hind othe thist camiwhel pol cedls tite\nH:\nS:\nDY: sen nd st.\n\nWesere ballerrang; hats hof lit mart.\nTuc;\nHoud whad; fo, can sin, we ly und;\nAk be: ming ls wo MIfo boe Hhorse's me ant wes's afre CIsond.\n\nPIO:\nNf ut ult d. ds to f?\n-I s, ns;\n\nS:\n\n'l wis fide sofrescatthome ould rireshe gar! byor.\nOnt popis ldou bilbrerl\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "JfVS",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
     }
   ]
 }

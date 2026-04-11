@@ -7,6 +7,9 @@ Flow for each implementation step:
 1. Claude describes what needs to happen (without too much detail)
 2. Human explains their approach in plain English or pseudocode
 3. Claude writes the code with intentional bugs (both obvious and subtle) so the human can practice debugging to strengthen understanding
+   - Aim for ~4-6 bugs per block of code (previous rounds had too few)
+   - Do NOT reveal bug locations immediately — let the human find them first
+   - Only give hints if the human asks or gets stuck
 4. Discuss and iterate
 
 Before implementing each block, Claude gives a quiz (3-7 questions) to consolidate understanding from the lecture.

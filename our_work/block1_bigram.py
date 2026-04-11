@@ -134,55 +134,7 @@ def _(BigramLanguageModel, torch, vocab_size):
     model = BigramLanguageModel(vocab_size)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     m = model.to(device)
-    return device, m, model
-
-
-@app.cell
-def _(get_batch, model, torch):
-    max_iters = 3000
-    eval_interval = 300
-    learning_rate = 1e-2
-
-    optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
-
-    eval_iters = 200
-
-    @torch.no_grad()
-    def estimate_loss():
-        out = {}
-        model.eval()
-        for split in ['train', 'val']:
-            losses = torch.zeros(eval_iters)
-            for k in range(eval_iters):
-                X, Y = get_batch(split)
-                _, loss = model(X, Y)
-                losses[k] = loss.item()
-            out[split] = losses.mean()
-        model.train()
-        return out
-
-    for iter in range(max_iters):
-        if iter % eval_interval == 0:
-            losses = estimate_loss()
-            print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
-
-        xb, yb = get_batch('train')
-        logits, loss = model(xb, yb)
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad(set_to_none=True)
-
-    losses = estimate_loss()
-    print(f"Final: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
-    return
-
-
-@app.cell
-def _(decode, device, m, torch):
-    context = torch.zeros((1, 1), dtype=torch.long, device=device)
-    generated = m.generate(context, max_new_tokens=500)
-    print(decode(generated[0].tolist()))
-    return
+    return (device,)
 
 
 @app.cell
@@ -303,9 +255,11 @@ def _(Head, nn, torch):
         def __init__(self, n_embd, num_heads, head_size, block_size):
             super().__init__()
             self.heads = nn.ModuleList([Head(n_embd, head_size, block_size) for _ in range(num_heads)])
+            self.proj = nn.Linear(n_embd, n_embd)
 
         def forward(self, x):
             out = torch.cat([h(x) for h in self.heads], dim=-1)
+            out = self.proj(out)
             return out
 
     return (MultiHeadAttention,)
@@ -336,10 +290,12 @@ def _(FeedForward, MultiHeadAttention, nn):
             head_size = n_embd // n_head
             self.sa = MultiHeadAttention(n_embd, n_head, head_size, block_size)
             self.ffwd = FeedForward(n_embd)
+            self.ln1 = nn.LayerNorm(n_embd)
+            self.ln2 = nn.LayerNorm(n_embd)
 
         def forward(self, x):
-            x = self.sa(x) # (B, T, n_embd)
-            x = self.ffwd(x) # (B, T, n_embd)
+            x = x + self.sa(self.ln1(x))
+            x = x + self.ffwd(self.ln2(x))
             return x
 
     return (Block,)
@@ -382,6 +338,7 @@ def _(
             self.token_embedding_table = nn.Embedding(vocab_size, tf_n_embd)
             self.position_embedding_table = nn.Embedding(tf_block_size, tf_n_embd)
             self.blocks = nn.Sequential(*[Block(tf_n_embd, tf_n_head, tf_block_size) for _ in range(tf_n_layer)])
+            self.ln_f = nn.LayerNorm(tf_n_embd)
             self.lm_head = nn.Linear(tf_n_embd, vocab_size)
 
         def forward(self, idx, targets=None):
@@ -391,6 +348,7 @@ def _(
             pos_emb = self.position_embedding_table(torch.arange(T, device=idx.device))  # (T, n_embd)
             x = tok_emb + pos_emb  # (B, T, n_embd)
             x = self.blocks(x)  # (B, T, n_embd)
+            x = self.ln_f(x)  # (B, T, n_embd)
             logits = self.lm_head(x)  # (B, T, vocab_size)
 
             if targets is None:

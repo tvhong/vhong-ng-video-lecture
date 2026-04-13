@@ -32,6 +32,7 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 | 2026-04-07 | 1.5h (8:00–9:30 PM)  | Block 2: Self-Attention versions 1-3 (items 5-7 complete)                             |
 | 2026-04-08 | 1.5h (9:30–11:00 PM) | Block 2: Watched single-head self-attention & positional embeddings, Q/K/V discussion |
 | 2026-04-09 | 1h                   | Block 2-3: Implemented single-head & multi-head attention, FFN, transformer block (items 8-12) |
+| 2026-04-13 | 1h                   | Block 4: Added dropout, scaled up model (items 13-17); watched Block 5 (items 18-19) |
 
 #### Block 1: Data & Bigram Baseline (0:00–38:01, ~1.5h implement)
 
@@ -64,15 +65,15 @@ A decoder-only Transformer trained on Tiny Shakespeare (~1MB text). Character-le
 
 **Watch** residual connections, layer norm, dropout, and scaling up. Then implement:
 
-13. [ ] Add residual connections: x = x + self_attn(x), x = x + ffwd(x)
-14. [ ] Add projection layers back into residual pathway (linear after attention concat, linear in FFN)
-15. [ ] Add LayerNorm (pre-norm formulation: normalize before attention and FFN)
-16. [ ] Add Dropout before residual connections and after softmax in attention
-17. [ ] Scale up: larger embedding dim, more heads, more layers; train and push val loss below 2.0
+13. [x] Add residual connections: x = x + self_attn(x), x = x + ffwd(x)
+14. [x] Add projection layers back into residual pathway (linear after attention concat, linear in FFN)
+15. [x] Add LayerNorm (pre-norm formulation: normalize before attention and FFN)
+16. [x] Add Dropout before residual connections and after softmax in attention
+17. [x] Scale up: larger embedding dim, more heads, more layers; trained with block_size=16, n_embd=64, 6 layers — val loss 2.27 (CPU-limited, did not reach <2.0)
 
 #### Block 5: Encoder/Decoder Discussion & nanoGPT (1:42:00–end, watch only)
 
 **Watch** the encoder vs decoder discussion, nanoGPT walkthrough, and ChatGPT/GPT-3 comparison. No implementation needed.
 
-18. [ ] Understand: decoder-only (causal mask) vs encoder (no mask) vs encoder-decoder (cross-attention)
-19. [ ] Understand: pretraining (document completer) vs fine-tuning (SFT → reward model → RLHF)
+18. [x] Understand: decoder-only (causal mask) vs encoder (no mask) vs encoder-decoder (cross-attention)
+19. [x] Understand: pretraining (document completer) vs fine-tuning (SFT → reward model → RLHF)

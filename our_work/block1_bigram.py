@@ -208,12 +208,13 @@ def _(mo):
 @app.cell
 def _(F, nn, torch):
     class Head(nn.Module):
-        def __init__(self, n_embd, head_size, block_size):
+        def __init__(self, n_embd, head_size, block_size, dropout):
             super().__init__()
             self.key = nn.Linear(n_embd, head_size, bias=False)
             self.query = nn.Linear(n_embd, head_size, bias=False)
             self.value = nn.Linear(n_embd, head_size, bias=False)
             self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))
+            self.dropout = nn.Dropout(dropout)
 
         def forward(self, x):
             B, T, C = x.shape
@@ -225,6 +226,7 @@ def _(F, nn, torch):
             wei = q @ k.transpose(-2, -1) * head_size**-0.5  # (B, T, T)
             wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
             wei = F.softmax(wei, dim=-1)  # (B, T, T)
+            wei = self.dropout(wei)
 
             # weighted aggregation of values
             v = self.value(x)  # (B, T, head_size)
@@ -241,7 +243,7 @@ def _(Head, torch):
     _head_size = 16
     _x = torch.randn(_B, _T, _C)
 
-    _head = Head(n_embd=_C, head_size=_head_size, block_size=_T)
+    _head = Head(n_embd=_C, head_size=_head_size, block_size=_T, dropout=0.2)
     _out = _head(_x)
     print(f"Input shape:  {_x.shape}")
     print(f"Output shape: {_out.shape}")
@@ -252,14 +254,15 @@ def _(Head, torch):
 @app.cell
 def _(Head, nn, torch):
     class MultiHeadAttention(nn.Module):
-        def __init__(self, n_embd, num_heads, head_size, block_size):
+        def __init__(self, n_embd, num_heads, head_size, block_size, dropout):
             super().__init__()
-            self.heads = nn.ModuleList([Head(n_embd, head_size, block_size) for _ in range(num_heads)])
+            self.heads = nn.ModuleList([Head(n_embd, head_size, block_size, dropout) for _ in range(num_heads)])
             self.proj = nn.Linear(n_embd, n_embd)
+            self.dropout = nn.Dropout(dropout)
 
         def forward(self, x):
             out = torch.cat([h(x) for h in self.heads], dim=-1)
-            out = self.proj(out)
+            out = self.dropout(self.proj(out))
             return out
 
     return (MultiHeadAttention,)
@@ -268,16 +271,17 @@ def _(Head, nn, torch):
 @app.cell
 def _(nn):
     class FeedForward(nn.Module):
-        def __init__(self, n_embd):
+        def __init__(self, n_embd, dropout):
             super().__init__()
             self.net = nn.Sequential(
                 nn.Linear(n_embd, 4 * n_embd),
                 nn.ReLU(),
                 nn.Linear(4 * n_embd, n_embd),
             )
+            self.dropout = nn.Dropout(dropout)
 
         def forward(self, x):
-            return self.net(x)
+            return self.dropout(self.net(x))
 
     return (FeedForward,)
 
@@ -285,11 +289,11 @@ def _(nn):
 @app.cell
 def _(FeedForward, MultiHeadAttention, nn):
     class Block(nn.Module):
-        def __init__(self, n_embd, n_head, block_size):
+        def __init__(self, n_embd, n_head, block_size, dropout):
             super().__init__()
             head_size = n_embd // n_head
-            self.sa = MultiHeadAttention(n_embd, n_head, head_size, block_size)
-            self.ffwd = FeedForward(n_embd)
+            self.sa = MultiHeadAttention(n_embd, n_head, head_size, block_size, dropout)
+            self.ffwd = FeedForward(n_embd, dropout)
             self.ln1 = nn.LayerNorm(n_embd)
             self.ln2 = nn.LayerNorm(n_embd)
 
@@ -317,7 +321,8 @@ def _():
     tf_n_embd = 32
     tf_n_head = 4
     tf_n_layer = 4
-    return tf_block_size, tf_n_embd, tf_n_head, tf_n_layer
+    tf_dropout = 0.2
+    return tf_block_size, tf_dropout, tf_n_embd, tf_n_head, tf_n_layer
 
 
 @app.cell
@@ -326,6 +331,7 @@ def _(
     F,
     nn,
     tf_block_size,
+    tf_dropout,
     tf_n_embd,
     tf_n_head,
     tf_n_layer,
@@ -337,7 +343,7 @@ def _(
             super().__init__()
             self.token_embedding_table = nn.Embedding(vocab_size, tf_n_embd)
             self.position_embedding_table = nn.Embedding(tf_block_size, tf_n_embd)
-            self.blocks = nn.Sequential(*[Block(tf_n_embd, tf_n_head, tf_block_size) for _ in range(tf_n_layer)])
+            self.blocks = nn.Sequential(*[Block(tf_n_embd, tf_n_head, tf_block_size, tf_dropout) for _ in range(tf_n_layer)])
             self.ln_f = nn.LayerNorm(tf_n_embd)
             self.lm_head = nn.Linear(tf_n_embd, vocab_size)
 

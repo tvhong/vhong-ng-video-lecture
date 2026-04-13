@@ -317,10 +317,10 @@ def _(mo):
 
 @app.cell
 def _():
-    tf_block_size = 8
-    tf_n_embd = 32
+    tf_block_size = 16
+    tf_n_embd = 64
     tf_n_head = 4
-    tf_n_layer = 4
+    tf_n_layer = 6
     tf_dropout = 0.2
     return tf_block_size, tf_dropout, tf_n_embd, tf_n_head, tf_n_layer
 
@@ -394,7 +394,7 @@ def _(TransformerLM, torch):
 def _(get_batch, tf_model, torch):
     tf_max_iters = 3000
     tf_eval_interval = 300
-    tf_learning_rate = 1e-3
+    tf_learning_rate = 1e-4
     tf_eval_iters = 200
 
     _optimizer = torch.optim.AdamW(tf_model.parameters(), lr=tf_learning_rate)

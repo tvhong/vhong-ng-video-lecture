@@ -16,7 +16,14 @@
           }
         }
       ],
-      "console": []
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "/home/ubuntu/workplace/vhong-ng-video-lecture/.venv/lib/python3.14/site-packages/torch/_subclasses/functional_tensor.py:307: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n",
+          "mimetype": "text/plain"
+        }
+      ]
     },
     {
       "id": "MJUe",
@@ -168,7 +175,14 @@
           }
         }
       ],
-      "console": []
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "/home/ubuntu/workplace/vhong-ng-video-lecture/.venv/lib/python3.14/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)\n  return torch._C._cuda_getDeviceCount() > 0\n",
+          "mimetype": "text/plain"
+        }
+      ]
     },
     {
       "id": "Kclp",
@@ -258,7 +272,7 @@
     },
     {
       "id": "ZHCJ",
-      "code_hash": "33f7b22294ad784a7a904d23ebf8b8be",
+      "code_hash": "6c4f013cc59898a40d9c9b49edb7c717",
       "outputs": [
         {
           "type": "data",
@@ -271,7 +285,7 @@
     },
     {
       "id": "ROlb",
-      "code_hash": "61f4bc544fb89b93002029897e855bd7",
+      "code_hash": "000fb58813debe289de9c5dd449623b9",
       "outputs": [
         {
           "type": "data",
@@ -291,7 +305,7 @@
     },
     {
       "id": "qnkX",
-      "code_hash": "3cadc925ea80b233da9614cacab7a3f0",
+      "code_hash": "414bd242d62a84fcace877b49a7f5d5a",
       "outputs": [
         {
           "type": "data",
@@ -304,7 +318,7 @@
     },
     {
       "id": "TqIu",
-      "code_hash": "b83b9bcafa93b9944725582c19c48631",
+      "code_hash": "e49eb0c95e2992d331675cba0d6c7cff",
       "outputs": [
         {
           "type": "data",
@@ -317,7 +331,7 @@
     },
     {
       "id": "Vxnm",
-      "code_hash": "a4469b20c85adb2da1d5f3ea20504f94",
+      "code_hash": "430f5578b93f5cb06205a2ee3ff8ba14",
       "outputs": [
         {
           "type": "data",
@@ -343,7 +357,7 @@
     },
     {
       "id": "ulZA",
-      "code_hash": "5c98611373eafb5b466466bd0c73d457",
+      "code_hash": "301750a5a553fbf5ad429eb8b7b164b4",
       "outputs": [
         {
           "type": "data",
@@ -356,7 +370,7 @@
     },
     {
       "id": "ecfG",
-      "code_hash": "5b5c1eee21f52346800a6eef06e9f751",
+      "code_hash": "1b150a683b6a07be6af2a7ec7577bb16",
       "outputs": [
         {
           "type": "data",
@@ -382,14 +396,14 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "Parameters: 55.0K\n",
+          "text": "Parameters: 308.3K\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
       "id": "ZBYS",
-      "code_hash": "47fa1db240998e9cf209ad49cc9efc12",
+      "code_hash": "5195f084703019b7db1d3d3244ac0fc2",
       "outputs": [
         {
           "type": "data",
@@ -402,7 +416,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "step 0: train loss 4.2304, val loss 4.2246\nstep 300: train loss 2.5219, val loss 2.5065\nstep 600: train loss 2.3516, val loss 2.3525\nstep 900: train loss 2.2539, val loss 2.2652\nstep 1200: train loss 2.1968, val loss 2.2223\nstep 1500: train loss 2.1522, val loss 2.1852\nstep 1800: train loss 2.1119, val loss 2.1629\nstep 2100: train loss 2.0859, val loss 2.1478\nstep 2400: train loss 2.0810, val loss 2.1087\nstep 2700: train loss 2.0647, val loss 2.1243\nFinal: train loss 2.0427, val loss 2.1101\n",
+          "text": "step 0: train loss 4.3357, val loss 4.3403\nstep 300: train loss 2.9779, val loss 2.9894\nstep 600: train loss 2.6750, val loss 2.6814\nstep 900: train loss 2.5547, val loss 2.5559\nstep 1200: train loss 2.4798, val loss 2.4807\nstep 1500: train loss 2.4256, val loss 2.4284\nstep 1800: train loss 2.3843, val loss 2.3968\nstep 2100: train loss 2.3545, val loss 2.3582\nstep 2400: train loss 2.3350, val loss 2.3327\nstep 2700: train loss 2.2787, val loss 2.2988\nFinal: train loss 2.2687, val loss 2.2735\n",
           "mimetype": "text/plain"
         }
       ]
@@ -422,7 +436,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "\nThy sir;\nIf this lork shing\nWhencrous ling; Why there sochars shalton a ualintimaged of sher purosh. Cogert a shewirdengtof\nAnd oursy wan an asay bethous dono his had veny tureesion, skrow in mide.\nServasten\nGor the wroph you, earting to furapeeghy high plom; your I waitke be try bagure med anon: in own you'ld be wor non,\nneacyse Fliole.\nIt lear! To norry gild, But she whay cear-mer see to oul parengue haagaust thene he herchy our meat? Uveriole my our denom earversty\nVear, which you good'ds we.\n",
+          "text": "\n hell,\nAulicth th sf \nThf Chifth\n\nIPsp urraprece'stlin ont ti'sthersth ve\n\n\n\nHuronit mprtbk\nKas stont,\nBy y an.\nThitbesurs:\nCShghidslares t siof mS, t h ohisath\nthr ke\n\n\nCathit wha pclf\n\n\n\nAtluroavevis h\nS ksit srha\nUAt by chit\nRCOAARRBOCHTh G\nJWA I WSILOSicrd:\nRARI Why\n\nBOQ\nTASAmal:\nSALAnth theenw\nAnores\n\nD :\nAm mellAsith\nI se hs Sewe ereatar stmsas thorest awr shevow tItte t het is \n\nCae why itsh h\nFitky thes t w\nAno orem\nF inhe gthaver tito\n\nAty sm thashethom rrr'saw s thol jy nissth S\nH:\nANT\n",
           "mimetype": "text/plain"
         }
       ]
@@ -430,7 +444,14 @@
     {
       "id": "nHfw",
       "code_hash": null,
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     }
   ]
